@@ -1,18 +1,23 @@
-import { StrictMode } from 'react'
+import { StrictMode, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.tsx'
-import EmployeeList from "./pages/employee-list/employee-list.tsx";
 import {Route, Routes} from "react-router";
 import {BrowserRouter} from "react-router-dom";
+import * as React from "react";
+import Loader from "./shared/component/loader/loader.tsx";
+
+const App  = React.lazy(() => import('./App.tsx'));
+const EmployeeList = React.lazy(() => import("./pages/employee-list/employee-list.tsx"));
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<App />}></Route>
-            <Route path="/employee-list" element={<EmployeeList />}></Route>
-        </Routes>
+        <Suspense fallback={<Loader />}>
+            <Routes>
+                <Route path="/" element={<App />}></Route>
+                <Route path="/employee-list" element={<EmployeeList />}></Route>
+            </Routes>
+        </Suspense>
     </BrowserRouter>
   </StrictMode>,
 )
