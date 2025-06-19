@@ -27,32 +27,54 @@
     background-color: var(--dropdown-button-background-primary);
     padding: var(--dropdown-button-padding-y) var(--dropdown-button-padding-x);
     border-radius: 5px;
+    border: 1px solid transparent;
+    will-change: transform;
     height: var(--dropdown-button-height);
     width: var(--dropdown-button-width);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
 
     &:hover {
       background-color: var(--dropdown-button-hover);
-      color: var(--dropdown-button-text-primary);
+      color: var(--dropdown-button-text-secondary);
     }
   }
 
+  & .opened {
+    border-radius: 5px 5px 0 0;
+    background-color: var(--dropdown-button-background-secondary)
+
+  }
+
   & .dropdown-content {
-    border-radius: 5px;
+    border-radius: 0 0 5px 5px;
     padding: 10px;
     max-height: 550px;
     overflow-y: scroll;
+    scrollbar-gutter: stable;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--dropdown-button-background-secondary) var(--dropdown-button-background-primary);
     height: calc(100% + 50px);
     width: calc(var(--dropdown-button-width) - 10px);
+    text-align: center;
     display: flex;
     flex-direction: column;
     gap: 10px;
     position: absolute;
+    z-index: 99999;
     top: calc(var(--dropdown-button-height) + var(--dropdown-button-padding-y) + 5px);
     left: 0;
-    background-color: var(--dropdown-button-background-secondary);
+    background-color: var(--dropdown-button-background-primary);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 
     & .dropdown-item {
+      cursor: pointer;
+      background-color: var(--dropdown-button-background-primary);
+      color: var(--dropdown-button-text-primary);
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: all 0.2s ease-in-out;
 
       &:hover {
         background-color: var(--dropdown-button-item-hover);

@@ -5,7 +5,11 @@
 }
 
 .caret {
-  fill: var(--table-text-primary-color);
+  fill: var(--dropdown-button-text-primary);
+}
+
+.dropdown-button:hover .caret {
+  fill: var(--dropdown-button-text-secondary);
 }
 
 /*# sourceMappingURL=caret.css.map */

@@ -3,9 +3,9 @@ import "./dropdown.scss";
 import Caret from "../caret/caret.tsx";
 import {DropdownProps} from "../../interfaces/dropdown.interface.ts";
 
-const Dropdown = ({options, placeholder = "Select option", height = '30px', width = "150px", paddingY = "5px", paddingX = "5px",
-                      primaryColor = "#ffffff", secondaryColor = "#ffffff", backgroundPrimaryColor = "#7247EC", backgroundSecondaryColor = "#7247EC",
-                  highlightColor = "#a38cef", hoverColor = "#f4f4f4", onDropdownItemSelected}: DropdownProps) => {
+const Dropdown = ({options, placeholder = "Select option", height = 30, width = 150, paddingY = 5, paddingX = 5,
+                      primaryColor = "#F8FAFC", secondaryColor = "#1E293B", backgroundPrimaryColor = "#1E293B", backgroundSecondaryColor = "#334155",
+                  itemHoverColor = "#475569", hoverColor = "#e4e4e4", onDropdownItemSelected}: DropdownProps) => {
 
     const [isDropdownOpened, setIsDropdownOpened] = useState<boolean>(false);
 
@@ -29,19 +29,19 @@ const Dropdown = ({options, placeholder = "Select option", height = '30px', widt
 
     useEffect(() => {
 
-        document.documentElement.style.setProperty("--dropdown-button-height", height);
-        document.documentElement.style.setProperty("--dropdown-button-width", width);
-        document.documentElement.style.setProperty("--dropdown-button-padding-y", paddingY);
-        document.documentElement.style.setProperty("--dropdown-button-padding-x", paddingX);
+        document.documentElement.style.setProperty("--dropdown-button-height", height + "px");
+        document.documentElement.style.setProperty("--dropdown-button-width", width + "px");
+        document.documentElement.style.setProperty("--dropdown-button-padding-y", paddingY + "px");
+        document.documentElement.style.setProperty("--dropdown-button-padding-x", paddingX + "px");
         document.documentElement.style.setProperty("--dropdown-button-text-primary", primaryColor);
         document.documentElement.style.setProperty("--dropdown-button-text-secondary", secondaryColor);
         document.documentElement.style.setProperty("--dropdown-button-background-primary", backgroundPrimaryColor);
         document.documentElement.style.setProperty("--dropdown-button-background-secondary", backgroundSecondaryColor);
-        document.documentElement.style.setProperty("--dropdown-button-item-hover", highlightColor);
+        document.documentElement.style.setProperty("--dropdown-button-item-hover", itemHoverColor);
         document.documentElement.style.setProperty("--dropdown-button-hover", hoverColor);
 
         return () => {}
-    }, [height, width, paddingY, paddingX, primaryColor, secondaryColor, backgroundPrimaryColor, backgroundSecondaryColor, highlightColor, hoverColor])
+    }, [height, width, paddingY, paddingX, primaryColor, secondaryColor, backgroundPrimaryColor, backgroundSecondaryColor, itemHoverColor, hoverColor])
 
     function handleSetDropdownItemSelected(option: string | number) {
         setDropdownItemSelected(option);
@@ -55,7 +55,7 @@ const Dropdown = ({options, placeholder = "Select option", height = '30px', widt
     return (
         <>
             <div className="dropdown-container" ref={dropDownRef}>
-                <div className="dropdown-button" onClick={() => setIsDropdownOpened(!isDropdownOpened)}>
+                <div className={isDropdownOpened ? "dropdown-button opened" : "dropdown-button"} onClick={() => setIsDropdownOpened(!isDropdownOpened)}>
                     <p>{dropdownItemSelected ? dropdownItemSelected : placeholder}</p>
                     <Caret />
                 </div>

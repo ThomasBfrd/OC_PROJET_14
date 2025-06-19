@@ -1,15 +1,15 @@
 export interface DropdownProps {
     placeholder?: string;
     options?: Array<string | number>;
-    height?: string;
-    width?: string;
-    paddingY?: string;
-    paddingX?: string;
+    height?: number;
+    width?: number;
+    paddingY?: number;
+    paddingX?: number;
     primaryColor?: string;
     secondaryColor?: string;
     backgroundPrimaryColor?: string;
     backgroundSecondaryColor?: string;
-    highlightColor?: string;
     hoverColor?: string;
+    itemHoverColor?: string;
     onDropdownItemSelected?: (option: string | number) => void;
 }
