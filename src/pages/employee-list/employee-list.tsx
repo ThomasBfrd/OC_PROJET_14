@@ -4,6 +4,8 @@ import Calendar from "../../components/calendar/component/calendar/calendar.tsx"
 import {TableProps} from "../../components/table/types/table-props.type.ts";
 import Table from "../../components/table/component/table/table.tsx";
 import Dropdown from "../../components/dropdown-menu/component/dropdown/dropdown.tsx";
+import Modal from "../../components/modal/components/modal/modal.tsx";
+import {useState} from "react";
 
 interface Person {
     firstName: string;
@@ -693,6 +695,8 @@ const mockData: TableProps<Person> =
 
 const EmployeeList = () => {
 
+    const [isModalOpened, setIsModalOpened] = useState(false);
+
     function onDateChange(date: string) {
         console.log(date)
     }
@@ -701,11 +705,57 @@ const EmployeeList = () => {
         console.log(item)
     }
 
+    function handleCloseModal() {
+        console.log("ok button clicked");
+        setIsModalOpened(false);
+    }
+
+    function handleCancelActionModal() {
+        console.log("canceling operation");
+        setIsModalOpened(false);
+    }
+
     return (
         <div id="employee-div" className="container">
             <h1>Current Employees</h1>
             <Link to="/">Home</Link>
-            <Dropdown options={options} onDropdownItemSelected={onDropDownItemSelected}/>
+            <button onClick={() => setIsModalOpened(!isModalOpened)}>Afficher la modal</button>
+            {isModalOpened ? (
+                // <Modal
+                //     title="Succès"
+                //     body="Félicitation, votre abonnement a bien été enregistré. Vous pouvez maintenant accéder à votre espace client."
+                //     type="success"
+                //     okButton="Fermer"
+                //     onOk={handleCloseModal}
+                // />
+                // <Modal
+                // title="Abonnement"
+                // body="Valider les informations bancaires ? Vous pourrez modifier vos informations plus tard."
+                // type="submit"
+                // okButton="Envoyer"
+                // cancelButton="Annuler"
+                // onOk={handleCloseModal}
+                // onCancel={handleCancelActionModal}
+                // />
+                <Modal
+                title="Erreur"
+                body="Une erreur est survenue lors de la récupération de vos données. Veuillez contacter l'assistance technique
+                au 01 02 03 04 05."
+                type="error"
+                okButton="Fermer"
+                onOk={handleCloseModal}
+                />
+            ) : null}
+            <Dropdown
+                options={options}
+                  onDropdownItemSelected={onDropDownItemSelected}
+                  primaryColor="#e2e8f0"
+                  secondaryColor="#0f172a"
+                  backgroundPrimaryColor="#1e293b"
+                  backgroundSecondaryColor="#334155"
+                  itemHoverColor="#10b981"
+                  hoverColor="#10b981"
+            />
             <label>Select a date</label>
             <Calendar
                 backgroundColor="#ffffff"

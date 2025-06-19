@@ -1,0 +1,25 @@
+.icon {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  right: 30px;
+  top: 30px;
+
+  & .success-icon-1 {
+    fill:#00a912;
+  }
+
+  & .success-icon-2 {
+    fill: #fff;
+  }
+
+  & .error-icon {
+    fill: #fa0324;
+  }
+
+  & .submit-icon {
+    fill: #1e1e1e;
+    fill-rule:evenodd;
+    clip-rule:evenodd;
+  }
+}
