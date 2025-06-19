@@ -16,7 +16,7 @@
 
 .calendar {
   position: absolute;
-  top: 0;
+  top: -10px;
   left: -135px;
   font-family: Roboto, sans-serif !important;
   background-color: var(--calendar-background-color);
