@@ -10,6 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@thomasbfrd/calendar": "^1.0.0",
+    "@thomasbfrd/dropdown": "^1.0.1",
+    "@thomasbfrd/modal": "^1.0.0",
+    "@thomasbfrd/table": "^1.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router": "^6.30.0",

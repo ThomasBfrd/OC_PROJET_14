@@ -1,11 +1,14 @@
 import "./employee-list.scss";
 import {Link} from "react-router-dom";
-import Calendar from "../../components/calendar/component/calendar/calendar.tsx";
-import {TableProps} from "../../components/table/types/table-props.type.ts";
-import Table from "../../components/table/component/table/table.tsx";
-import Dropdown from "../../components/dropdown-menu/component/dropdown/dropdown.tsx";
-import Modal from "../../components/modal/components/modal/modal.tsx";
 import {useState} from "react";
+import { Modal } from "@thomasbfrd/modal";
+import "@thomasbfrd/modal/dist/modal.css";
+import { Table, TableProps } from "@thomasbfrd/table";
+import "@thomasbfrd/table/dist/table.css";
+import { Calendar } from "@thomasbfrd/calendar";
+import "@thomasbfrd/calendar/dist/calendar.css";
+import { Dropdown } from "@thomasbfrd/dropdown";
+import "@thomasbfrd/dropdown/dist/dropdown.css";
 
 interface Person {
     firstName: string;
@@ -710,10 +713,10 @@ const EmployeeList = () => {
         setIsModalOpened(false);
     }
 
-    function handleCancelActionModal() {
-        console.log("canceling operation");
-        setIsModalOpened(false);
-    }
+    // function handleCancelActionModal() {
+    //     console.log("canceling operation");
+    //     setIsModalOpened(false);
+    // }
 
     return (
         <div id="employee-div" className="container">
@@ -721,29 +724,12 @@ const EmployeeList = () => {
             <Link to="/">Home</Link>
             <button onClick={() => setIsModalOpened(!isModalOpened)}>Afficher la modal</button>
             {isModalOpened ? (
-                // <Modal
-                //     title="Succès"
-                //     body="Félicitation, votre abonnement a bien été enregistré. Vous pouvez maintenant accéder à votre espace client."
-                //     type="success"
-                //     okButton="Fermer"
-                //     onOk={handleCloseModal}
-                // />
-                // <Modal
-                // title="Abonnement"
-                // body="Valider les informations bancaires ? Vous pourrez modifier vos informations plus tard."
-                // type="submit"
-                // okButton="Envoyer"
-                // cancelButton="Annuler"
-                // onOk={handleCloseModal}
-                // onCancel={handleCancelActionModal}
-                // />
                 <Modal
-                title="Erreur"
-                body="Une erreur est survenue lors de la récupération de vos données. Veuillez contacter l'assistance technique
-                au 01 02 03 04 05."
-                type="error"
-                okButton="Fermer"
-                onOk={handleCloseModal}
+                    title="Succès"
+                    body="Félicitation, votre abonnement a bien été enregistré. Vous pouvez maintenant accéder à votre espace client."
+                    type="success"
+                    okButton="Fermer"
+                    onOk={handleCloseModal}
                 />
             ) : null}
             <Dropdown
