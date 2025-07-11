@@ -14,7 +14,6 @@ interface EmployeeListProps {
 const EmployeeList = (employeesData: EmployeeListProps) => {
 
     useEffect(() => {
-        console.log(employeesData.employees)
 
         return () => {};
     }, [employeesData]);

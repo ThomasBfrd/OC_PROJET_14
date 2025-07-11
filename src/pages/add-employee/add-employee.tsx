@@ -3,13 +3,9 @@ import {Dropdown} from "@thomasbfrd/dropdown";
 import "@thomasbfrd/dropdown/dist/dropdown.css";
 import {COUNTRIES} from "../../shared/constants/countries.constant.ts";
 import {RefObject, useEffect, useRef, useState} from "react";
-// import Modal from "@thomasbfrd/modal/src/components/modal/modal.tsx";
-// import "@thomasbfrd/modal/src/components/modal/modal.scss";
 import {Modal} from "@thomasbfrd/modal";
 import "@thomasbfrd/modal/dist/modal.css";
 import {useNavigate} from "react-router-dom";
-// import Calendar from "@thomasbfrd/calendar/src/components/component/calendar/calendar";
-// import "@thomasbfrd/calendar/src/components/component/calendar/calendar.scss";
 import {Calendar} from "@thomasbfrd/calendar";
 import "@thomasbfrd/calendar/dist/calendar.css";
 import {Person} from "../../shared/interfaces/person.interface.ts";
@@ -31,7 +27,7 @@ type AddEmployeeProps = {
 
 const AddEmployee = ({newEmployeeData}: AddEmployeeProps
 ) => {
-    const {register, handleSubmit, getValues, setValue, formState: {errors, isValid}} = useForm({
+    const {register, handleSubmit, setValue, formState: {errors, isValid}} = useForm({
         mode: "onChange"
     });
 
@@ -84,14 +80,12 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
     }, [birthDateCalendarRef, dateOfBirthOpened, startDateCalendarRef, startDateOpened]);
 
     function onDepartmentSelected(value: Departments) {
-        setValue("department", value, { shouldValidate: true});
-        console.log("Récupération de department : ", getValues("department"));
+        setValue("department", value, {shouldValidate: true});
         setDepartmentSelected(value);
     }
 
     function onStateSelected(value: string) {
-        setValue("state", value, { shouldValidate: true});
-        console.log("Récupération de state : ", getValues("state"));
+        setValue("state", value, {shouldValidate: true});
         setStateSelected(value);
     }
 
@@ -110,30 +104,25 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
         }
         setValidated(true);
         setNewEmployee(result);
-        console.log("Employé crée ! ", result);
     }
 
     function redirectToList() {
         if (newEmployee) {
-            console.log(newEmployee);
             newEmployeeData(newEmployee);
         }
 
+        setValidated(false);
         return navigate('/employee-list');
     }
 
     function onBirthDateDateChange(date: string) {
-        console.log(date);
         setValue("dateOfBirth", new Date(date).toLocaleDateString());
-        console.log("Récupération de dateOfBirth : ", getValues("dateOfBirth"));
         setBirthDateChange(new Date(date).toLocaleDateString());
         setDateOfBirthOpened(false);
     }
 
     function onStartDateDateChange(date: string) {
-        console.log(date);
         setValue("startDate", new Date(date).toLocaleDateString());
-        console.log("Récupération de startDate : ", getValues("startDate"));
         setStartDateChange(new Date(date).toLocaleDateString());
         setStartDateOpened(false);
     }
@@ -297,15 +286,18 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
                         </div>
 
                         <button type="submit" className={!isValid ? "add-submit-button disabled" : "add-submit-button"}
-                        disabled={!isValid}>Save
+                                disabled={!isValid}>Save
                         </button>
                     </form>
 
                 </div>
+                {validated ? (
+                    <div className="modal">
+                        <Modal type="success" title="Success" body="Employee Created!" okButton="Close"
+                               onOk={redirectToList}/>
+                    </div>
+                ) : null}
             </div>
-            {validated ? (
-                <Modal type="success" title="Success" body="Employee Created!" okButton="Close" onOk={redirectToList}/>
-            ) : null}
         </>
     );
 };
