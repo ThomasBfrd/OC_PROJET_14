@@ -1,14 +1,14 @@
 import * as React from "react";
-import {ActionDispatch, Suspense, useEffect, useReducer} from "react";
-import {Navigate, Route, Routes} from "react-router";
-import {BrowserRouter} from "react-router-dom";
+import {Suspense, useEffect, useReducer} from "react";
+import {Navigate, Route, Routes} from "react-router-dom";
 import Loader from "./shared/components/loader/loader.tsx";
 import Header from "./shared/components/header/header.tsx";
 import {Person} from "./shared/interfaces/person.interface.ts";
 import {TableProps} from "@thomasbfrd/table";
 import {EMPLOYEES_LIST} from "./shared/constants/employees-list.constant.ts";
+import "./App.css";
 
-const employeeReducer = (state: TableProps<Person>, action: ActionDispatch<Person>) => {
+const employeeReducer = (state: TableProps<Person>, action: any) => {
     switch (action.type) {
         case "ADD_EMPLOYEE":
             return {
@@ -30,7 +30,8 @@ const App = () => {
     useEffect(() => {
         console.log(employeesData)
 
-        return () => {};
+        return () => {
+        };
     }, [employeesData]);
 
     function addEmployee(employee: Person) {
@@ -48,15 +49,14 @@ const App = () => {
     return (
         <>
             <Header/>
-            <BrowserRouter>
-                <Suspense fallback={<Loader/>}>
-                    <Routes>
-                        <Route path="" element={<Navigate to="/employee-list" replace={true}/>}/>
-                        <Route path="/employee-list" element={<EmployeeList employees={employeesData}/>}></Route>
-                        <Route path="/add-employee" element={<AddEmployee newEmployeeData={getNewEmployee}/>}></Route>
-                    </Routes>
-                </Suspense>
-            </BrowserRouter>
+            <Suspense fallback={<Loader/>}>
+                <Routes>
+                    <Route path="*" element={<Navigate to="/employee-list" replace={true}/>}/>
+                    <Route path="/employee-list" element={<EmployeeList employees={employeesData}/>}></Route>
+                    <Route path="/add-employee"
+                           element={<AddEmployee newEmployeeData={getNewEmployee}/>}></Route>
+                </Routes>
+            </Suspense>
         </>
     );
 };
