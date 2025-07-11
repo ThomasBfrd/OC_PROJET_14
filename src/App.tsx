@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Suspense, useEffect, useReducer} from "react";
+import {ActionDispatch, Suspense, useEffect, useReducer} from "react";
 import {Navigate, Route, Routes} from "react-router";
 import {BrowserRouter} from "react-router-dom";
 import Loader from "./shared/components/loader/loader.tsx";
@@ -8,7 +8,7 @@ import {Person} from "./shared/interfaces/person.interface.ts";
 import {TableProps} from "@thomasbfrd/table";
 import {EMPLOYEES_LIST} from "./shared/constants/employees-list.constant.ts";
 
-const employeeReducer = (state: TableProps<Person>, action: any) => {
+const employeeReducer = (state: TableProps<Person>, action: ActionDispatch<Person>) => {
     switch (action.type) {
         case "ADD_EMPLOYEE":
             return {

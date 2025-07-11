@@ -1,4 +1,5 @@
-// export type Departments = "sales" | "marketing" | "engineering" | "humanResources" | "legal";
+import {Departments} from "../types/departments.type.ts";
+
 export const DEPARTMENTS = [
     {
         value: 'sales',
@@ -21,3 +22,12 @@ export const DEPARTMENTS = [
         label: 'Legal'
     },
 ]
+
+export const DepartmentLabels: Record<Departments, string> = {
+    null: "",
+    sales: "Sales",
+    marketing: "Marketing",
+    engineering: "Engineering",
+    humanResources: "Human Resources",
+    legal: "Legal"
+}

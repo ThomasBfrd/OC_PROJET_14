@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@thomasbfrd/calendar": "^1.0.2",
-    "@thomasbfrd/dropdown": "^1.0.5",
+    "@thomasbfrd/dropdown": "^1.0.6",
     "@thomasbfrd/modal": "^1.0.0",
     "@thomasbfrd/table": "^1.0.0",
     "react": "^19.0.0",
