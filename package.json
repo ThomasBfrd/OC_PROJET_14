@@ -10,12 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@thomasbfrd/calendar": "^1.0.0",
-    "@thomasbfrd/dropdown": "^1.0.1",
+    "@thomasbfrd/calendar": "^1.0.2",
+    "@thomasbfrd/dropdown": "^1.0.5",
     "@thomasbfrd/modal": "^1.0.0",
     "@thomasbfrd/table": "^1.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.60.0",
     "react-router": "^6.30.0",
     "react-router-dom": "^6.30.0"
   },
