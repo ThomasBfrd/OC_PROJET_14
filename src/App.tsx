@@ -28,8 +28,6 @@ const App = () => {
     const [employeesData, dispatch] = useReducer(employeeReducer, EMPLOYEES_LIST);
 
     useEffect(() => {
-        console.log(employeesData)
-
         return () => {
         };
     }, [employeesData]);
@@ -42,7 +40,6 @@ const App = () => {
     }
 
     function getNewEmployee(employee: Person) {
-        console.log(employee)
         addEmployee(employee);
     }
 

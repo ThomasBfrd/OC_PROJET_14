@@ -10,7 +10,7 @@ import {Calendar} from "@thomasbfrd/calendar";
 import "@thomasbfrd/calendar/dist/calendar.css";
 import {Person} from "../../shared/interfaces/person.interface.ts";
 import {Departments} from "../../shared/types/departments.type.ts";
-import {useForm} from "react-hook-form";
+import {FieldValues, useForm} from "react-hook-form";
 import {DEPARTMENTS} from "../../shared/constants/departments.constant.ts";
 
 const countries = COUNTRIES.map((country: { name: string, code: string }) => {
@@ -28,10 +28,8 @@ type AddEmployeeProps = {
 const AddEmployee = ({newEmployeeData}: AddEmployeeProps
 ) => {
     const {register, handleSubmit, setValue, formState: {errors, isValid}} = useForm({
-        mode: "onChange"
+        mode: "onSubmit"
     });
-
-    const onSubmit = (data: Person) => submitData(data);
 
     const [validated, setValidated] = useState<boolean>(false);
 
@@ -48,6 +46,8 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
     const [birthDateChange, setBirthDateChange] = useState<string>('');
 
     const [startDateChange, setStartDateChange] = useState<string>('');
+
+    const [confirmModal, setConfirmModal] = useState<boolean>(false);
 
     const birthDateCalendarRef: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement | null>(null);
 
@@ -79,9 +79,9 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
         }
     }, [birthDateCalendarRef, dateOfBirthOpened, startDateCalendarRef, startDateOpened]);
 
-    function onDepartmentSelected(value: Departments) {
+    function onDepartmentSelected(value: string) {
         setValue("department", value, {shouldValidate: true});
-        setDepartmentSelected(value);
+        setDepartmentSelected(value as Departments);
     }
 
     function onStateSelected(value: string) {
@@ -89,7 +89,7 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
         setStateSelected(value);
     }
 
-    function submitData(data: Person) {
+    function submitData(data: FieldValues) {
 
         const result: Person = {
             firstName: data.firstName,
@@ -103,6 +103,7 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
             zip: data.zip,
         }
         setValidated(true);
+        setConfirmModal(false);
         setNewEmployee(result);
     }
 
@@ -112,6 +113,7 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
         }
 
         setValidated(false);
+        setConfirmModal(false);
         return navigate('/employee-list');
     }
 
@@ -135,12 +137,16 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
         setStartDateOpened(!startDateOpened);
     }
 
+    function confirmCreateEmployee() {
+        setConfirmModal(true);
+    }
+
     return (
         <>
             <div className="add-container">
                 <div className="add-content">
                     <h2 className="add-title">Create Employee</h2>
-                    <form className="add-form" onSubmit={handleSubmit(onSubmit)}>
+                    <form className="add-form">
                         <div className="add-form-input">
                             <label htmlFor="first-name">First Name</label>
                             <input type="text" id="first-name" placeholder="First Name" {...register("firstName", {
@@ -185,7 +191,7 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
 
                         <div className="add-form-input">
                             <label htmlFor="department">Department</label>
-                            <div style={{"--dropdown-button-height": "150px", "--dropdown-button-width": "180px"}}>
+                            <div>
                                 <Dropdown
                                     paddingY={5}
                                     paddingX={10}
@@ -253,7 +259,7 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
 
                         <div className="add-form-input">
                             <label htmlFor="state">State</label>
-                            <div style={{"--dropdown-button-height": "150px", "--dropdown-button-width": "180px"}}>
+                            <div>
                                 <Dropdown
                                     width={180}
                                     paddingY={5}
@@ -284,17 +290,23 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
                             })} aria-invalid={errors.zip ? "true" : "false"} aria-describedby="zip-error"/>
                             {errors.zip && <span className="error-message">Zip Code is required.</span>}
                         </div>
-
-                        <button type="submit" className={!isValid ? "add-submit-button disabled" : "add-submit-button"}
-                                disabled={!isValid}>Save
-                        </button>
                     </form>
+                    <button type="button" className={!isValid ? "add-submit-button disabled" : "add-submit-button"}
+                            disabled={!isValid} onClick={confirmCreateEmployee}>Save
+                    </button>
 
                 </div>
                 {validated ? (
                     <div className="modal">
                         <Modal type="success" title="Success" body="Employee Created!" okButton="Close"
                                onOk={redirectToList}/>
+                    </div>
+                ) : null}
+                {confirmModal ? (
+                    <div className="modal">
+                        <Modal type="submit" title="Warning" body="Are you sure you want to create this employee?"
+                               okButton="Yes" cancelButton="No" onOk={handleSubmit(submitData)}
+                               onCancel={() => setConfirmModal(false)}/>
                     </div>
                 ) : null}
             </div>

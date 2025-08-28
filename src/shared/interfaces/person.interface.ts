@@ -1,10 +1,8 @@
-import {Departments} from "../types/departments.type.ts";
-
 export interface Person {
     firstName: string;
     lastName: string;
     startDate: string;
-    department: Departments;
+    department: string;
     dateOfBirth: string;
     street: string;
     city: string;

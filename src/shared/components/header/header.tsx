@@ -4,11 +4,11 @@ import {Link} from "react-router-dom";
 const Header = () => {
     const menu: Array<{ title: string, path: string }> = [
         {
-            title: "Employee List",
+            title: "Employees",
             path: "/employee-list"
         },
         {
-            title: "Add Employee",
+            title: "Add",
             path: "/add-employee"
         }
     ];
@@ -16,15 +16,15 @@ const Header = () => {
     return (
         <header className="header-container">
             <div className="header-content">
-                <Link to="/" className="header-logo">
-                    <h1 className="header-title">HRnet</h1>
+                <Link to="/" className="header-title">
+                    HRnet
                 </Link>
                 <nav>
                     <ul className="header-menu-list">
                         {menu.map((item: { title: string, path: string }, index: number) => {
                             return (
-                                <li className="header-menu-list-item link" key={index}>
-                                    <Link to={item.path}>
+                                <li key={index}>
+                                    <Link to={item.path} className="header-menu-link link">
                                         {item.title}
                                     </Link>
                                 </li>

@@ -1,19 +1,24 @@
 .header-container {
   height: 60px;
-  width: 100%;
   border-bottom: 1px solid #ccc;
   padding: 0;
   margin: 0;
 }
 .header-container .header-content {
   display: flex;
+  flex: 1;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
   font-family: "Roboto", sans-serif;
 }
-.header-container .header-title {
-  font-size: 20px;
+.header-container .header-content .header-title {
+  font-size: 28px;
+  font-weight: 600;
+  text-decoration: none;
+  color: black;
+  margin-bottom: 5px;
+  padding-right: 20px;
 }
 
 .header-menu-list {

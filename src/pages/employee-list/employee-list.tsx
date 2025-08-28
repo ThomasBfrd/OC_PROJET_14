@@ -2,8 +2,6 @@ import "./employee-list.scss";
 import {Link} from "react-router-dom";
 import "@thomasbfrd/table/dist/table.css";
 import {Table, TableProps} from "@thomasbfrd/table";
-// import Table from "@thomasbfrd/table/src/components/component/table/table.tsx";
-// import "@thomasbfrd/table/src/components/component/table/table.scss";
 import {Person} from "../../shared/interfaces/person.interface.ts";
 import {useEffect} from "react";
 
@@ -25,14 +23,14 @@ const EmployeeList = (employeesData: EmployeeListProps) => {
                 <button className="add-employee-button">
                     Add employee
                 </button>
-               </Link>
+            </Link>
 
             {employeesData.employees.data && employeesData.employees.headers ? (
             <Table data={employeesData.employees.data}
                    headers={employeesData.employees.headers}
-                   backgroundHeaderFooterColor="#333446"
+                   backgroundHeaderFooterColor="#000"
                    backgroundBodyTable="#ffffff"
-                   activeColor="#333446"
+                   activeColor="#000"
                    textPrimaryColor="#ffffff"
                    textSecondaryColor="#2d3142"
                    hoverColor="#EAEFEF"
