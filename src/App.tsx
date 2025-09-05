@@ -1,58 +1,59 @@
-import './App.scss';
-import {Link} from "react-router-dom";
+import * as React from "react";
+import {Suspense, useEffect, useReducer} from "react";
+import {Navigate, Route, Routes} from "react-router-dom";
+import Loader from "./shared/components/loader/loader.tsx";
+import Header from "./shared/components/header/header.tsx";
+import {Person} from "./shared/interfaces/person.interface.ts";
+import {TableProps} from "@thomasbfrd/table";
+import {EMPLOYEES_LIST} from "./shared/constants/employees-list.constant.ts";
+import "./App.css";
+
+const employeeReducer = (state: TableProps<Person>, action: any) => {
+    switch (action.type) {
+        case "ADD_EMPLOYEE":
+            return {
+                ...state,
+                data: [...state.data, action.payload]
+            };
+        default:
+            return state;
+    }
+}
+
+const AddEmployee = React.lazy(() => import('./pages/add-employee/add-employee.tsx'));
+const EmployeeList = React.lazy(() => import("./pages/employee-list/employee-list.tsx"));
 
 const App = () => {
+
+    const [employeesData, dispatch] = useReducer(employeeReducer, EMPLOYEES_LIST);
+
+    useEffect(() => {
+        return () => {
+        };
+    }, [employeesData]);
+
+    function addEmployee(employee: Person) {
+        dispatch({
+            type: "ADD_EMPLOYEE",
+            payload: employee
+        });
+    }
+
+    function getNewEmployee(employee: Person) {
+        addEmployee(employee);
+    }
+
     return (
         <>
-            <div className="title">
-                <h1>HRnet</h1>
-            </div>
-            <div className="container">
-
-                <Link to="/employee-list">View Current Employees</Link>
-                <h2>Create Employee</h2>
-                <form action="#" id="create-employee">
-                    <label htmlFor="first-name">First Name</label>
-                    <input type="text" id="first-name"/>
-
-                    <label htmlFor="last-name">Last Name</label>
-                    <input type="text" id="last-name"/>
-
-                    <label htmlFor="date-of-birth">Date of Birth</label>
-                    <input id="date-of-birth" type="text"/>
-
-                    <label htmlFor="start-date">Start Date</label>
-                    <input id="start-date" type="text"/>
-
-                    <fieldset className="address">
-                        <legend>Address</legend>
-
-                        <label htmlFor="street">Street</label>
-                        <input id="street" type="text"/>
-
-                        <label htmlFor="city">City</label>
-                        <input id="city" type="text"/>
-
-                        <label htmlFor="state">State</label>
-                        <select name="state" id="state"></select>
-
-                        <label htmlFor="zip-code">Zip Code</label>
-                        <input id="zip-code" type="number"/>
-                    </fieldset>
-
-                    <label htmlFor="department">Department</label>
-                    <select name="department" id="department">
-                        <option>Sales</option>
-                        <option>Marketing</option>
-                        <option>Engineering</option>
-                        <option>Human Resources</option>
-                        <option>Legal</option>
-                    </select>
-                </form>
-
-                <button>Save</button>
-            </div>
-            <div id="confirmation" className="modal">Employee Created!</div>
+            <Header/>
+            <Suspense fallback={<Loader/>}>
+                <Routes>
+                    <Route path="*" element={<Navigate to="/employee-list" replace={true}/>}/>
+                    <Route path="/employee-list" element={<EmployeeList employees={employeesData}/>}></Route>
+                    <Route path="/add-employee"
+                           element={<AddEmployee newEmployeeData={getNewEmployee}/>}></Route>
+                </Routes>
+            </Suspense>
         </>
     );
 };

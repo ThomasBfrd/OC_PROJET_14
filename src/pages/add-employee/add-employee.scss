@@ -1,0 +1,106 @@
+.add-container {
+  position: relative;
+  margin: 0 auto;
+  max-width: 480px;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.add-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  & .add-title {
+    font-size: 20px;
+    align-self: start;
+    padding: 20px 0 40px 0;
+    margin-left: 50px;
+  }
+
+  & .add-submit-button {
+    align-self: flex-end;
+    padding: 15px 30px;
+    border-radius: 5px;
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 15px;
+    margin-bottom: 30px;
+    font-size: 16px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background-color: #fff;
+      color: #000;
+      border: 1px solid #000;
+    }
+  }
+
+  & .disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: #000;
+      color: #fff;
+      border: 1px solid #000;
+    }
+  }
+}
+
+.add-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+  padding: 0 20px;
+
+  & .add-form-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 10px;
+
+    & > input, select {
+      width: 180px;
+      height: 20px;
+      padding: 10px 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+  }
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (min-width: 480px) {
+  .add-form {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    max-width: 720px;
+  }
+}
