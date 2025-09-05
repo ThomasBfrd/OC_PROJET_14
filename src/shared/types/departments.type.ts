@@ -1,0 +1,1 @@
+export type Departments = "null" | "sales" | "marketing" | "engineering" | "humanResources" | "legal";

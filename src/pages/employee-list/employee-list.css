@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.add-employee-button {
+  align-self: flex-end;
+  padding: 15px 30px;
+  border-radius: 5px;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 15px;
+  margin-bottom: 30px;
+  font-size: 16px;
+  border: 1px solid transparent;
+  transition: all 0.3s ease-in-out;
+}
+.add-employee-button:hover {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
+
+/*# sourceMappingURL=employee-list.css.map */
