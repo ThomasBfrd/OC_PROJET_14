@@ -13,7 +13,7 @@
     "@thomasbfrd/calendar": "^1.0.4",
     "@thomasbfrd/dropdown": "^1.0.8",
     "@thomasbfrd/modal": "^1.0.0",
-    "@thomasbfrd/table": "^1.0.2",
+    "@thomasbfrd/table": "^1.0.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.60.0",
