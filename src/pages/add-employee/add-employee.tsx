@@ -37,7 +37,7 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
 
     const [startDateOpened, setStartDateOpened] = useState<boolean>(false);
 
-    const [departmentSelected, setDepartmentSelected] = useState<Departments>('null');
+    const [departmentSelected, setDepartmentSelected] = useState<Departments>('null' as Departments);
 
     const [newEmployee, setNewEmployee] = useState<Person>();
 
@@ -85,12 +85,13 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
     }
 
     function onStateSelected(value: string) {
-        setValue("state", value, {shouldValidate: true});
-        setStateSelected(value);
+        const selectedCountry =
+            countries.find((country: { value: string, label: string }) => country.value === value)?.label;
+        setValue("state", selectedCountry, {shouldValidate: true});
+        setStateSelected(selectedCountry as string);
     }
 
     function submitData(data: FieldValues) {
-
         const result: Person = {
             firstName: data.firstName,
             lastName: data.lastName,

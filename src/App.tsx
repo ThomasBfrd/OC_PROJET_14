@@ -4,17 +4,21 @@ import {Navigate, Route, Routes} from "react-router-dom";
 import Loader from "./shared/components/loader/loader.tsx";
 import Header from "./shared/components/header/header.tsx";
 import {Person} from "./shared/interfaces/person.interface.ts";
-import {TableProps} from "@thomasbfrd/table";
-import {EMPLOYEES_LIST} from "./shared/constants/employees-list.constant.ts";
 import "./App.css";
+import {useFetch} from "./shared/hooks/useFetch.hook.tsx";
 
-const employeeReducer = (state: TableProps<Person>, action: any) => {
+type EmployeeAction = {
+    type: 'ADD_EMPLOYEE' | 'SET_EMPLOYEES';
+    payload: Array<Person> | Person;
+
+}
+
+const employeeReducer = (state: Array<Person>, action: EmployeeAction) => {
     switch (action.type) {
         case "ADD_EMPLOYEE":
-            return {
-                ...state,
-                data: [...state.data, action.payload]
-            };
+            return [...state, action.payload as Person];
+        case "SET_EMPLOYEES":
+            return [...(action.payload as Array<Person>)];
         default:
             return state;
     }
@@ -25,12 +29,18 @@ const EmployeeList = React.lazy(() => import("./pages/employee-list/employee-lis
 
 const App = () => {
 
-    const [employeesData, dispatch] = useReducer(employeeReducer, EMPLOYEES_LIST);
+    const fetchedEmployees: Array<Person> = useFetch('http://localhost:3000/employees');
+    const [employeesData, dispatch] = useReducer(employeeReducer, []);
 
     useEffect(() => {
-        return () => {
-        };
-    }, [employeesData]);
+        if (fetchedEmployees.length > 0) {
+            dispatch({
+                type: "SET_EMPLOYEES",
+                payload: fetchedEmployees
+            });
+        }
+    }, [fetchedEmployees]);
+
 
     function addEmployee(employee: Person) {
         dispatch({

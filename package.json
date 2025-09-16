@@ -5,15 +5,18 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:server": "concurrently \"npm run dev\" \"json-server db.json\"",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "preview:server": "concurrently \"npm run preview\" \"json-server db.json\""
   },
   "dependencies": {
     "@thomasbfrd/calendar": "^1.0.4",
-    "@thomasbfrd/dropdown": "^1.0.8",
+    "@thomasbfrd/dropdown": "^1.0.9",
     "@thomasbfrd/modal": "^1.0.0",
     "@thomasbfrd/table": "^1.0.3",
+    "json-server": "^1.0.0-beta.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.60.0",
@@ -25,6 +28,7 @@
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.2.1",
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
