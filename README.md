@@ -38,7 +38,7 @@ Les librairies intégrées au projet sont : <br />
 <br />
 
 Pour récupérer le projet, clonez directement ce repository puis faites un ``` npm install ```. <br />
-Enfin, lancez la commande ```npm run dev```.
+Enfin, lancez la commande ```npm run dev:server```.
 
 P.I : Le projet tourne sur node 18.18.0.
 

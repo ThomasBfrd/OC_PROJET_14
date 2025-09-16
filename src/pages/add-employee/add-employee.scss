@@ -2,7 +2,6 @@
   position: relative;
   margin: 0 auto;
   max-width: 480px;
-  height: 100vh;
   overflow: hidden;
 }
 
@@ -63,12 +62,15 @@
   margin-bottom: 50px;
   padding: 0 20px;
 
+  & .label-form {
+    margin-bottom: 10px;
+  }
+
   & .add-form-input {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: start;
-    gap: 10px;
 
     & > input, select {
       width: 180px;

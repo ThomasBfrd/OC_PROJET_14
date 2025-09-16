@@ -37,7 +37,7 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
 
     const [startDateOpened, setStartDateOpened] = useState<boolean>(false);
 
-    const [departmentSelected, setDepartmentSelected] = useState<Departments>('null');
+    const [departmentSelected, setDepartmentSelected] = useState<Departments>('null' as Departments);
 
     const [newEmployee, setNewEmployee] = useState<Person>();
 
@@ -85,12 +85,13 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
     }
 
     function onStateSelected(value: string) {
-        setValue("state", value, {shouldValidate: true});
-        setStateSelected(value);
+        const selectedCountry =
+            countries.find((country: { value: string, label: string }) => country.value === value)?.label;
+        setValue("state", selectedCountry, {shouldValidate: true});
+        setStateSelected(selectedCountry as string);
     }
 
     function submitData(data: FieldValues) {
-
         const result: Person = {
             firstName: data.firstName,
             lastName: data.lastName,
@@ -148,30 +149,56 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
                     <h2 className="add-title">Create Employee</h2>
                     <form className="add-form">
                         <div className="add-form-input">
-                            <label htmlFor="first-name">First Name</label>
-                            <input type="text" id="first-name" placeholder="First Name" {...register("firstName", {
-                                required: true,
-                                minLength: 2
-                            })} aria-invalid={errors.firstName ? "true" : "false"} aria-describedby="firstName-error"/>
+                            <label
+                                className="label-form"
+                                htmlFor="first-name">First Name</label>
+                            <input
+                                type="text"
+                                id="first-name"
+                                placeholder="First Name"
+                                {...register("firstName", {
+                                    required: true,
+                                    minLength: 2
+                                })}
+                                aria-invalid={errors.firstName ? "true" : "false"}
+                                aria-describedby="firstName-error"
+                            />
                             {errors.firstName && <span className="error-message">First Name is required.</span>}
                         </div>
 
                         <div className="add-form-input">
-                            <label htmlFor="last-name">Last Name</label>
-                            <input type="text" id="last-name" placeholder="Last Name" {...register("lastName", {
-                                required: true,
-                                minLength: 2
-                            })} aria-invalid={errors.lastName ? "true" : "false"} aria-describedby="lastName-error"/>
+                            <label
+                                className="label-form"
+                                htmlFor="last-name">Last Name</label>
+                            <input
+                                type="text"
+                                id="last-name"
+                                placeholder="Last Name"
+                                {...register("lastName", {
+                                    required: true,
+                                    minLength: 2
+                                })}
+                                aria-invalid={errors.lastName ? "true" : "false"}
+                                aria-describedby="lastName-error"
+                            />
                             {errors.lastName && <span className="error-message">Last Name is required.</span>}
                         </div>
 
                         <div className="add-form-input" ref={startDateCalendarRef}>
-                            <label htmlFor="start-date">Start Date</label>
-                            <input onClick={toggleStartDate} value={startDateChange} type="text" id="start-date"
-                                   placeholder="Start Date" {...register("startDate", {
-                                required: true,
-                                minLength: 2
-                            })} aria-invalid={errors.startDate ? "true" : "false"} aria-describedby="startDate-error"/>
+                            <label className="label-form" htmlFor="start-date">Start Date</label>
+                            <input
+                                onClick={toggleStartDate}
+                                value={startDateChange}
+                                type="text"
+                                id="start-date"
+                                placeholder="Start Date"
+                                {...register("startDate", {
+                                    required: true,
+                                    minLength: 2
+                                })}
+                                aria-invalid={errors.startDate ? "true" : "false"}
+                                aria-describedby="startDate-error"
+                            />
                             {errors.startDate && <span className="error-message">Start date is required.</span>}
                             {startDateOpened ? (
                                 <Calendar
@@ -190,7 +217,7 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
                         </div>
 
                         <div className="add-form-input">
-                            <label htmlFor="department">Department</label>
+                            <label className="label-form" htmlFor="department">Department</label>
                             <div>
                                 <Dropdown
                                     paddingY={5}
@@ -206,22 +233,33 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
                                     hoverColor="#fff"
                                 />
                             </div>
-                            <input type="hidden" {...register("department", {
-                                required: true,
-                                minLength: 2
-                            })} aria-invalid={errors.department ? "true" : "false"}
-                                   aria-describedby="department-error"/>
+                            <input
+                                type="hidden"
+                                {...register("department", {
+                                    required: true,
+                                    minLength: 2
+                                })}
+                                aria-invalid={errors.department ? "true" : "false"}
+                                aria-describedby="department-error"
+                            />
                             {errors.department && <span className="error-message">Department is required.</span>}
                         </div>
 
                         <div className="add-form-input" ref={birthDateCalendarRef}>
-                            <label htmlFor="date-of-birth">Date of Birth</label>
-                            <input onClick={toggleDateOfBirth} value={birthDateChange} type="text" id="date-of-birth"
-                                   placeholder="Date of Birth" {...register("dateOfBirth", {
-                                required: true,
-                                minLength: 2
-                            })} aria-invalid={errors.dateOfBirth ? "true" : "false"}
-                                   aria-describedby="dateOfBirth-error"/>
+                            <label className="label-form" htmlFor="date-of-birth">Date of Birth</label>
+                            <input
+                                onClick={toggleDateOfBirth}
+                                value={birthDateChange}
+                                type="text"
+                                id="date-of-birth"
+                                placeholder="Date of Birth"
+                                {...register("dateOfBirth", {
+                                    required: true,
+                                    minLength: 2
+                                })}
+                                aria-invalid={errors.dateOfBirth ? "true" : "false"}
+                                aria-describedby="dateOfBirth-error"
+                            />
                             {errors.dateOfBirth && <span className="error-message">Date of birth is required.</span>}
                             {dateOfBirthOpened ? (
                                 <Calendar
@@ -240,30 +278,47 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
                         </div>
 
                         <div className="add-form-input">
-                            <label htmlFor="street">Street</label>
-                            <input id="street" type="text" placeholder="Street" {...register("street", {
-                                required: true,
-                                minLength: 2
-                            })} aria-invalid={errors.street ? "true" : "false"} aria-describedby="street-error"/>
+                            <label
+                                className="label-form"
+                                htmlFor="street">Street</label>
+                            <input
+                                id="street"
+                                type="text"
+                                placeholder="Street"
+                                {...register("street", {
+                                    required: true,
+                                    minLength: 2
+                                })}
+                                aria-invalid={errors.street ? "true" : "false"}
+                                aria-describedby="street-error"
+                            />
                             {errors.street && <span className="error-message">Street is required.</span>}
                         </div>
 
                         <div className="add-form-input">
-                            <label htmlFor="city">City</label>
-                            <input id="city" type="text" placeholder="City" {...register("city", {
-                                required: true,
-                                minLength: 2
-                            })} aria-invalid={errors.city ? "true" : "false"} aria-describedby="city-error"/>
+                            <label
+                                className="label-form"
+                                htmlFor="city">City</label>
+                            <input
+                                id="city"
+                                type="text"
+                                placeholder="City"
+                                {...register("city", {
+                                    required: true,
+                                    minLength: 2
+                                })}
+                                aria-invalid={errors.city ? "true" : "false"}
+                                aria-describedby="city-error"/>
                             {errors.city && <span className="error-message">City is required.</span>}
                         </div>
 
                         <div className="add-form-input">
-                            <label htmlFor="state">State</label>
+                            <label className="label-form" htmlFor="state">State</label>
                             <div>
                                 <Dropdown
                                     width={180}
                                     paddingY={5}
-                                    paddingX={5}
+                                    paddingX={10}
                                     placeholder="Select a state"
                                     options={countries}
                                     onDropdownItemSelected={onStateSelected}
@@ -275,38 +330,59 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
                                     hoverColor="#fff"
                                 />
                             </div>
-                            <input type="hidden" {...register("state", {
-                                required: true,
-                                minLength: 2
-                            })} aria-invalid={errors.state ? "true" : "false"} aria-describedby="state-error"/>
+                            <input
+                                type="hidden"
+                                {...register("state", {
+                                    required: true,
+                                    minLength: 2
+                                })}
+                                aria-invalid={errors.state ? "true" : "false"}
+                                aria-describedby="state-error"/>
                             {errors.state && <span className="error-message">State is required.</span>}
                         </div>
 
                         <div className="add-form-input">
-                            <label htmlFor="zip-code">Zip Code</label>
-                            <input id="zip-code" type="number" placeholder="Zip Code" {...register("zip", {
-                                required: true,
-                                minLength: 2
-                            })} aria-invalid={errors.zip ? "true" : "false"} aria-describedby="zip-error"/>
+                            <label className="label-form" htmlFor="zip-code">Zip Code</label>
+                            <input
+                                id="zip-code"
+                                type="number"
+                                placeholder="Zip Code"
+                                {...register("zip", {
+                                    required: true,
+                                    minLength: 2
+                                })}
+                                aria-invalid={errors.zip ? "true" : "false"}
+                                aria-describedby="zip-error"/>
                             {errors.zip && <span className="error-message">Zip Code is required.</span>}
                         </div>
                     </form>
-                    <button type="button" className={!isValid ? "add-submit-button disabled" : "add-submit-button"}
-                            disabled={!isValid} onClick={confirmCreateEmployee}>Save
+                    <button
+                        type="button"
+                        className={!isValid ? "add-submit-button disabled" : "add-submit-button"}
+                        disabled={!isValid} onClick={confirmCreateEmployee}>Save
                     </button>
 
                 </div>
                 {validated ? (
                     <div className="modal">
-                        <Modal type="success" title="Success" body="Employee Created!" okButton="Close"
-                               onOk={redirectToList}/>
+                        <Modal
+                            type="success"
+                            title="Success"
+                            body="Employee Created!"
+                            okButton="Close"
+                            onOk={redirectToList}/>
                     </div>
                 ) : null}
                 {confirmModal ? (
                     <div className="modal">
-                        <Modal type="submit" title="Warning" body="Are you sure you want to create this employee?"
-                               okButton="Yes" cancelButton="No" onOk={handleSubmit(submitData)}
-                               onCancel={() => setConfirmModal(false)}/>
+                        <Modal
+                            type="submit"
+                            title="Warning"
+                            body="Are you sure you want to create this employee?"
+                            okButton="Yes"
+                            cancelButton="No"
+                            onOk={handleSubmit(submitData)}
+                            onCancel={() => setConfirmModal(false)}/>
                     </div>
                 ) : null}
             </div>
