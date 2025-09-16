@@ -1,20 +1,32 @@
 import "./employee-list.scss";
 import {Link} from "react-router-dom";
 import "@thomasbfrd/table/dist/table.css";
-import {Table, TableProps} from "@thomasbfrd/table";
+import {Table} from "@thomasbfrd/table";
 import {Person} from "../../shared/interfaces/person.interface.ts";
-import {useEffect} from "react";
+import {HEADERS} from "../../shared/constants/headers.constant.ts";
+import {DepartmentLabels} from "../../shared/constants/departments.constant.ts";
 
 interface EmployeeListProps {
-    employees: TableProps<Person>;
+    employees: Array<Person>;
 }
 
 const EmployeeList = (employeesData: EmployeeListProps) => {
 
-    useEffect(() => {
+    const filteredEmployees: Array<Person> = employeesData.employees.map(({id, ...person}) => person);
 
-        return () => {};
-    }, [employeesData]);
+    const filter: Array<Person> = filteredEmployees.map((person: Person) => (
+        {
+            firstName: person.firstName,
+            lastName: person.lastName,
+            startDate: person.startDate,
+            department: DepartmentLabels[person.department as keyof typeof DepartmentLabels],
+            dateOfBirth: person.dateOfBirth,
+            street: person.street,
+            city: person.city,
+            state: person.state,
+            zip: person.zip,
+        }
+    ))
 
     return (
         <div id="employee-div" className="container">
@@ -25,9 +37,9 @@ const EmployeeList = (employeesData: EmployeeListProps) => {
                 </button>
             </Link>
 
-            {employeesData.employees.data && employeesData.employees.headers ? (
-            <Table data={employeesData.employees.data}
-                   headers={employeesData.employees.headers}
+            {filter && HEADERS ? (
+            <Table data={filter}
+                   headers={HEADERS}
                    backgroundHeaderFooterColor="#000"
                    backgroundBodyTable="#ffffff"
                    activeColor="#000"
