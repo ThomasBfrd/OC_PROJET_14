@@ -149,7 +149,7 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
                     <h2 className="add-title">Create Employee</h2>
                     <form className="add-form">
                         <div className="add-form-input">
-                            <label htmlFor="first-name">First Name</label>
+                            <label className="label-form" htmlFor="first-name">First Name</label>
                             <input type="text" id="first-name" placeholder="First Name" {...register("firstName", {
                                 required: true,
                                 minLength: 2
@@ -158,7 +158,7 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
                         </div>
 
                         <div className="add-form-input">
-                            <label htmlFor="last-name">Last Name</label>
+                            <label className="label-form" htmlFor="last-name">Last Name</label>
                             <input type="text" id="last-name" placeholder="Last Name" {...register("lastName", {
                                 required: true,
                                 minLength: 2
@@ -167,7 +167,7 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
                         </div>
 
                         <div className="add-form-input" ref={startDateCalendarRef}>
-                            <label htmlFor="start-date">Start Date</label>
+                            <label className="label-form" htmlFor="start-date">Start Date</label>
                             <input onClick={toggleStartDate} value={startDateChange} type="text" id="start-date"
                                    placeholder="Start Date" {...register("startDate", {
                                 required: true,
@@ -191,7 +191,7 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
                         </div>
 
                         <div className="add-form-input">
-                            <label htmlFor="department">Department</label>
+                            <label className="label-form" htmlFor="department">Department</label>
                             <div>
                                 <Dropdown
                                     paddingY={5}
@@ -216,7 +216,7 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
                         </div>
 
                         <div className="add-form-input" ref={birthDateCalendarRef}>
-                            <label htmlFor="date-of-birth">Date of Birth</label>
+                            <label className="label-form" htmlFor="date-of-birth">Date of Birth</label>
                             <input onClick={toggleDateOfBirth} value={birthDateChange} type="text" id="date-of-birth"
                                    placeholder="Date of Birth" {...register("dateOfBirth", {
                                 required: true,
@@ -241,7 +241,7 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
                         </div>
 
                         <div className="add-form-input">
-                            <label htmlFor="street">Street</label>
+                            <label className="label-form" htmlFor="street">Street</label>
                             <input id="street" type="text" placeholder="Street" {...register("street", {
                                 required: true,
                                 minLength: 2
@@ -250,7 +250,7 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
                         </div>
 
                         <div className="add-form-input">
-                            <label htmlFor="city">City</label>
+                            <label className="label-form" htmlFor="city">City</label>
                             <input id="city" type="text" placeholder="City" {...register("city", {
                                 required: true,
                                 minLength: 2
@@ -259,12 +259,12 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
                         </div>
 
                         <div className="add-form-input">
-                            <label htmlFor="state">State</label>
+                            <label className="label-form" htmlFor="state">State</label>
                             <div>
                                 <Dropdown
                                     width={180}
                                     paddingY={5}
-                                    paddingX={5}
+                                    paddingX={10}
                                     placeholder="Select a state"
                                     options={countries}
                                     onDropdownItemSelected={onStateSelected}
@@ -284,7 +284,7 @@ const AddEmployee = ({newEmployeeData}: AddEmployeeProps
                         </div>
 
                         <div className="add-form-input">
-                            <label htmlFor="zip-code">Zip Code</label>
+                            <label className="label-form" htmlFor="zip-code">Zip Code</label>
                             <input id="zip-code" type="number" placeholder="Zip Code" {...register("zip", {
                                 required: true,
                                 minLength: 2
