@@ -12,8 +12,8 @@
     "preview:server": "concurrently \"npm run preview\" \"json-server db.json\""
   },
   "dependencies": {
-    "@thomasbfrd/calendar": "^1.0.4",
-    "@thomasbfrd/dropdown": "^1.0.9",
+    "@thomasbfrd/calendar": "^1.0.5",
+    "@thomasbfrd/dropdown": "^1.0.10",
     "@thomasbfrd/modal": "^1.0.0",
     "@thomasbfrd/table": "^1.0.4",
     "json-server": "^1.0.0-beta.3",
