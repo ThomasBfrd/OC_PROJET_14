@@ -15,7 +15,7 @@
     "@thomasbfrd/calendar": "^1.0.4",
     "@thomasbfrd/dropdown": "^1.0.9",
     "@thomasbfrd/modal": "^1.0.0",
-    "@thomasbfrd/table": "^1.0.3",
+    "@thomasbfrd/table": "^1.0.4",
     "json-server": "^1.0.0-beta.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
